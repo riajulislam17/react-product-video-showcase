@@ -35,43 +35,51 @@
 | `slideInterval`   | `number`                                    | Time between slides (in ms)                              |
 | `sliderDirection` | `"forward"` \| `"backward"`                 | Slide direction                                          |
 | `modalCardSlide`  | `"vertical"` \| `"horizontal"`              | Modal animation direction                                |
-| `sectionHeader`   | `({ handleNext, handlePrev }) => ReactNode` | Optional header for next/prev buttons                    |
+| `sectionHeader`   | `({ handleNext, handlePrev }) => ReactNode` | Optional header for title or next/prev buttons           |
 
 
 
 # Product Shape
-interface Product {
-  id: string;
-  slug?: string;
-  title: string;
-  price: number;
-  discountPrice?: number;
-  videoUrl: string;
-  currency?: string;
-}
+| Property         | Type     |
+| ---------------- | -------- |
+| `id`             | `string` |
+| `slug?`          | `string` |
+| `title`          | `string` |
+| `price`          | `number` |
+| `discountPrice?` | `number` |
+| `videoUrl`       | `string` |
+| `currency?`      | `string` |
+
+
 
 # VideoConfig Shape
-interface VideoConfig {
-  autoplay?: boolean;
-  mute?: boolean;
-  loop?: boolean;
-  controls?: boolean;
-  modestBranding?: boolean;
-  rel?: boolean;
-  showInfo?: boolean;
-  facebookAllowFullscreen?: boolean;
-  show_text?: boolean;
-}
+| Property                   | Type      |
+| -------------------------- | --------- |
+| `autoplay?`                | `boolean` |
+| `mute?`                    | `boolean` |
+| `loop?`                    | `boolean` |
+| `controls?`                | `boolean` |
+| `modestBranding?`          | `boolean` |
+| `rel`                      | `boolean` |
+| `showInfo?`                | `boolean` |
+| `facebookAllowFullscreen?` | `boolean` |
+| `show_text?`               | `boolean` |
+
 
 # Layout Shape
-interface Layout {
-  desktop: { column: number; row: number };
-  tablet: { column: number; row: number };
-  mobile: { column: number; row: number };
-}
+| Property  | Type                              |
+| --------- | --------------------------------- |
+| `desktop` | `{ column: number; row: number }` |
+| `tablet`  | `{ column: number; row: number }` |
+| `mobile`  | `{ column: number; row: number }` |
+
 
 
 # Live Demo
+```https://react-product-video-showcase.vercel.app/```
+
+# npm link
+```https://www.npmjs.com/package/react-product-video-showcase```
 
 # 📄 License
 MIT © Riajul Islam

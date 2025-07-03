@@ -14,13 +14,13 @@
 - supports react >=17
 
 # Installation
-### ```npm install react-product-video-slider```
+### ```npm i react-product-video-showcase```
 # or
 ### ```yarn add react-product-video-slider```
 
 
 # Usage
-## ```import { ProductGrid } from "react-video-product-showcase"```
+## ```import { ProductGrid } from "react-product-video-showcase";"```
 
 ## Props
 | Prop              | Type                                        | Description                                              |

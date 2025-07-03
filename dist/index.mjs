@@ -1,7 +1,3 @@
-// src/index.tsx
-import React4 from "react";
-import ReactDOM from "react-dom";
-
 // src/components/ProductGrid.tsx
 import { useEffect as useEffect5, useRef as useRef4, useState as useState5 } from "react";
 
@@ -144,7 +140,7 @@ function useVideoPlatform(url) {
 }
 
 // src/components/VideoPlayer.tsx
-import { Fragment, jsx } from "react/jsx-runtime";
+import { jsx } from "react/jsx-runtime";
 var VideoPlayer = ({
   videoUrl,
   videoConfig = {}
@@ -152,7 +148,7 @@ var VideoPlayer = ({
   const [ref, isVisible] = useLazyLoad();
   const { platform, videoId, embedUrl, error } = useVideoPlatform(videoUrl);
   if (error) {
-    return /* @__PURE__ */ jsx("div", { className: "text-red-500", children: error });
+    return /* @__PURE__ */ jsx("div", { className: "rpvs-text-red-500", children: error });
   }
   const queryParams = new URLSearchParams();
   if (videoConfig.autoplay) queryParams.set("autoplay", "1");
@@ -170,11 +166,11 @@ var VideoPlayer = ({
     queryParams.set("show_text", "false");
   }
   const finalEmbedUrl = `${embedUrl}${embedUrl?.includes("?") ? "&" : "?"}${queryParams.toString()}`;
-  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx(
+  return /* @__PURE__ */ jsx(
     "div",
     {
       ref,
-      className: "min-w-full min-h-[50vh] aspect-video bg-black relative rounded overflow-hidden",
+      className: "rpvs-min-w-full rpvs-min-h-[50vh] rpvs-aspect-video rpvs-bg-black rpvs-relative rpvs-rounded rpvs-overflow-hidden",
       children: isVisible ? /* @__PURE__ */ jsx(
         "iframe",
         {
@@ -183,13 +179,13 @@ var VideoPlayer = ({
           src: finalEmbedUrl,
           width: "100%",
           height: platform === "facebook" ? "500" : "100%",
-          className: platform === "youtube" ? "w-full h-full" : "",
+          className: platform === "youtube" ? "rpvs-w-full rpvs-h-full" : "",
           allow: "autoplay; encrypted-media",
           allowFullScreen: platform === "facebook" ? videoConfig.facebookAllowFullscreen : true
         }
-      ) : /* @__PURE__ */ jsx("div", { className: "w-full h-full bg-gray-600 relative", children: /* @__PURE__ */ jsx("div", { className: "absolute inset-0 flex items-center justify-center", children: /* @__PURE__ */ jsx("div", { className: "w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" }) }) })
+      ) : /* @__PURE__ */ jsx("div", { className: "rpvs-w-full rpvs-h-full rpvs-bg-gray-600 rpvs-relative", children: /* @__PURE__ */ jsx("div", { className: "rpvs-absolute rpvs-inset-0 rpvs-flex rpvs-items-center rpvs-justify-center", children: /* @__PURE__ */ jsx("div", { className: "rpvs-w-12 rpvs-h-12 rpvs-border-4 rpvs-border-white rpvs-border-t-transparent rpvs-rounded-full rpvs-animate-spin" }) }) })
     }
-  ) });
+  );
 };
 
 // src/utils/icons.tsx
@@ -264,7 +260,7 @@ var ArrowRight = (props) => /* @__PURE__ */ jsx2(
 );
 
 // src/components/ProductCard.tsx
-import { Fragment as Fragment2, jsx as jsx3, jsxs } from "react/jsx-runtime";
+import { jsx as jsx3, jsxs } from "react/jsx-runtime";
 var ProductCard = ({
   product,
   slide = false,
@@ -275,37 +271,37 @@ var ProductCard = ({
   onExpand
 }) => {
   const finalConfig = mergeVideoConfig(videoConfig);
-  return /* @__PURE__ */ jsx3(Fragment2, { children: /* @__PURE__ */ jsxs(
+  return /* @__PURE__ */ jsxs(
     "div",
     {
-      className: `flex flex-col rounded overflow-hidden ${slide ? "min-w-[250px] max-w-sm" : "w-full"}`,
+      className: `rpvs-flex rpvs-flex-col rpvs-rounded rpvs-overflow-hidden ${slide ? "rpvs-min-w-[250px] rpvs-max-w-sm" : "rpvs-w-full"}`,
       children: [
-        /* @__PURE__ */ jsxs("div", { className: "relative aspect-[4/5] md:aspect-[5/6] w-full bg-black flex items-center justify-center", children: [
+        /* @__PURE__ */ jsxs("div", { className: "rpvs-relative rpvs-aspect-[4/5] md:rpvs-aspect-[5/6] rpvs-w-full rpvs-bg-black rpvs-flex rpvs-items-center rpvs-justify-center", children: [
           /* @__PURE__ */ jsx3(VideoPlayer, { videoUrl: product.videoUrl, videoConfig: finalConfig }),
           expandCard && /* @__PURE__ */ jsx3(
             "button",
             {
               type: "button",
               title: "Expand",
-              className: "absolute top-0 right-0 text-white p-1 rounded cursor-pointer",
+              className: "rpvs-absolute rpvs-top-0 rpvs-right-0 rpvs-text-white rpvs-p-1 rpvs-rounded rpvs-cursor-pointer",
               onClick: onExpand,
               "aria-label": "Expand video",
-              children: /* @__PURE__ */ jsx3(Maximize, { className: "text-white  w-8 h-8" })
+              children: /* @__PURE__ */ jsx3(Maximize, { className: "rpvs-text-white rpvs-w-8 rpvs-h-8" })
             }
           )
         ] }),
-        /* @__PURE__ */ jsxs("div", { className: "flex flex-col", children: [
+        /* @__PURE__ */ jsxs("div", { className: "rpvs-flex rpvs-flex-col", children: [
           contents && /* @__PURE__ */ jsx3("div", { children: contents }),
           buttons && /* @__PURE__ */ jsx3("div", { children: buttons })
         ] })
       ]
     }
-  ) });
+  );
 };
 
 // src/components/ProductModalY.tsx
 import { useEffect as useEffect2, useRef as useRef2, useState as useState2 } from "react";
-import { Fragment as Fragment3, jsx as jsx4, jsxs as jsxs2 } from "react/jsx-runtime";
+import { jsx as jsx4, jsxs as jsxs2 } from "react/jsx-runtime";
 var ProductModalY = ({
   products,
   activeIndex,
@@ -325,7 +321,6 @@ var ProductModalY = ({
   useEffect2(() => {
     if (containerRef.current && cardRefs.current[index]) {
       cardRefs.current[index]?.scrollIntoView({
-        // behavior: "instant",
         block: "start"
       });
     }
@@ -352,10 +347,10 @@ var ProductModalY = ({
     else if (deltaY < -50 && index < products.length - 1) setIndex(index + 1);
     touchStartY.current = null;
   };
-  return /* @__PURE__ */ jsx4(Fragment3, { children: /* @__PURE__ */ jsxs2(
+  return /* @__PURE__ */ jsxs2(
     "div",
     {
-      className: "fixed inset-0 z-50 bg-black/90 flex justify-center items-center transition-opacity",
+      className: "rpvs-fixed rpvs-inset-0 rpvs-z-50 rpvs-bg-black/90 rpvs-flex rpvs-justify-center rpvs-items-center rpvs-transition-opacity",
       onTouchStart: handleTouchStart,
       onTouchEnd: handleTouchEnd,
       role: "dialog",
@@ -365,54 +360,55 @@ var ProductModalY = ({
           "button",
           {
             onClick: onClose,
-            className: "absolute top-4 left-4 z-50 text-white cursor-pointer",
-            children: /* @__PURE__ */ jsx4(Minimize, { "aria-label": "Close modal", className: "w-6 h-6 text-white" })
+            className: "rpvs-absolute rpvs-top-4 rpvs-left-4 rpvs-z-50 rpvs-text-white rpvs-cursor-pointer",
+            "aria-label": "Close modal",
+            children: /* @__PURE__ */ jsx4(Minimize, { className: "rpvs-w-6 rpvs-h-6 rpvs-text-white" })
           }
         ),
-        /* @__PURE__ */ jsxs2("div", { className: "hidden md:flex flex-col absolute right-4 top-1/2 -translate-y-1/2 z-50 space-y-3", children: [
+        /* @__PURE__ */ jsxs2("div", { className: "rpvs-hidden md:rpvs-flex rpvs-flex-col rpvs-absolute rpvs-right-4 rpvs-top-1/2 -rpvs-translate-y-1/2 rpvs-z-50 rpvs-space-y-3", children: [
           index > 0 ? /* @__PURE__ */ jsx4(
             "button",
             {
               onClick: () => setIndex(index - 1),
-              className: "p-3 bg-white/60 rounded-full hover:bg-white/80 cursor-pointer",
-              children: /* @__PURE__ */ jsx4(ArrowUp, { className: "w-6 h-6 text-black" })
+              className: "rpvs-p-3 rpvs-bg-white/60 rpvs-rounded-full hover:rpvs-bg-white/80 rpvs-cursor-pointer",
+              children: /* @__PURE__ */ jsx4(ArrowUp, { className: "rpvs-w-6 rpvs-h-6 rpvs-text-black" })
             }
-          ) : /* @__PURE__ */ jsx4("button", {}),
+          ) : /* @__PURE__ */ jsx4("button", { disabled: true, className: "rpvs-opacity-0" }),
           index < products.length - 1 ? /* @__PURE__ */ jsx4(
             "button",
             {
               onClick: () => setIndex(index + 1),
-              className: "p-3 bg-white/60 rounded-full hover:bg-white/80 cursor-pointer",
-              children: /* @__PURE__ */ jsx4(ArrowDown, { className: "w-6 h-6 text-black" })
+              className: "rpvs-p-3 rpvs-bg-white/60 rpvs-rounded-full hover:rpvs-bg-white/80 rpvs-cursor-pointer",
+              children: /* @__PURE__ */ jsx4(ArrowDown, { className: "rpvs-w-6 rpvs-h-6 rpvs-text-black" })
             }
-          ) : /* @__PURE__ */ jsx4("button", {})
+          ) : /* @__PURE__ */ jsx4("button", { disabled: true, className: "rpvs-opacity-0" })
         ] }),
         /* @__PURE__ */ jsx4(
           "div",
           {
             ref: containerRef,
-            className: "w-full h-full overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar",
+            className: "rpvs-w-full rpvs-h-full rpvs-overflow-y-auto rpvs-snap-y rpvs-snap-mandatory rpvs-scroll-smooth rpvs-hide-scrollbar",
             children: products.map((product, i) => /* @__PURE__ */ jsx4(
               "div",
               {
                 ref: (el) => {
                   cardRefs.current[i] = el;
                 },
-                className: "w-full min-h-screen snap-start flex justify-center items-center",
+                className: "rpvs-w-full rpvs-min-h-screen rpvs-snap-start rpvs-flex rpvs-justify-center rpvs-items-center",
                 children: /* @__PURE__ */ jsxs2(
                   "div",
                   {
-                    className: `w-full max-w-lg md:max-w-2xl h-screen max-h-screen flex flex-col items-center bg-black text-white overflow-hidden rounded shadow-lg transition-all duration-300 ease-in-out 
-                ${animating && i === index ? "scale-95 opacity-50" : "scale-100 opacity-100"}`,
+                    className: `rpvs-w-full rpvs-max-w-lg md:rpvs-max-w-2xl rpvs-h-screen rpvs-max-h-screen rpvs-flex rpvs-flex-col rpvs-items-center rpvs-bg-black rpvs-text-white rpvs-overflow-hidden rpvs-rounded rpvs-shadow-lg rpvs-transition-all rpvs-duration-300 rpvs-ease-in-out 
+              ${animating && i === index ? "rpvs-scale-95 rpvs-opacity-50" : "rpvs-scale-100 rpvs-opacity-100"}`,
                     children: [
-                      /* @__PURE__ */ jsx4("div", { className: "relative flex-grow w-full flex items-center justify-center bg-black", children: /* @__PURE__ */ jsx4(
+                      /* @__PURE__ */ jsx4("div", { className: "rpvs-relative rpvs-flex-grow rpvs-w-full rpvs-flex rpvs-items-center rpvs-justify-center rpvs-bg-black", children: /* @__PURE__ */ jsx4(
                         VideoPlayer,
                         {
                           videoUrl: product.videoUrl,
                           videoConfig
                         }
                       ) }),
-                      /* @__PURE__ */ jsxs2("div", { className: "p-4 space-y-3 w-full bg-black/30", children: [
+                      /* @__PURE__ */ jsxs2("div", { className: "rpvs-p-4 rpvs-space-y-3 rpvs-w-full rpvs-bg-black/30", children: [
                         contents && contents(product),
                         buttons && buttons(product)
                       ] })
@@ -426,7 +422,7 @@ var ProductModalY = ({
         )
       ]
     }
-  ) });
+  );
 };
 
 // src/components/ProductModalX.tsx
@@ -466,7 +462,7 @@ var ProductModalX = ({
   return /* @__PURE__ */ jsxs3(
     "div",
     {
-      className: "fixed inset-0 z-50 bg-black/90 flex justify-center items-center transition-opacity",
+      className: "rpvs-fixed rpvs-inset-0 rpvs-z-50 rpvs-bg-black/90 rpvs-flex rpvs-justify-center rpvs-items-center rpvs-transition-opacity",
       onTouchStart: handleTouchStart,
       onTouchEnd: handleTouchEnd,
       children: [
@@ -474,43 +470,43 @@ var ProductModalX = ({
           "button",
           {
             onClick: onClose,
-            className: "absolute top-4 left-4 z-50 p-3 cursor-pointer",
+            className: "rpvs-absolute rpvs-top-4 rpvs-left-4 rpvs-z-50 rpvs-p-3 rpvs-cursor-pointer",
             "aria-label": "Close modal",
-            children: /* @__PURE__ */ jsx5(Minimize, { className: "w-6 h-6 text-white" })
+            children: /* @__PURE__ */ jsx5(Minimize, { className: "rpvs-w-6 rpvs-h-6 rpvs-text-white" })
           }
         ),
-        /* @__PURE__ */ jsxs3("div", { className: "hidden md:flex flex-row absolute top-1/2 -translate-y-1/2 z-50 justify-between w-full px-4", children: [
+        /* @__PURE__ */ jsxs3("div", { className: "rpvs-hidden md:rpvs-flex rpvs-flex-row rpvs-absolute rpvs-top-1/2 -rpvs-translate-y-1/2 rpvs-z-50 rpvs-justify-between rpvs-w-full rpvs-px-4", children: [
           index > 0 ? /* @__PURE__ */ jsx5(
             "button",
             {
               onClick: () => setIndex(index - 1),
-              className: "p-3 bg-white/60 rounded-full hover:bg-white/80 cursor-pointer",
-              children: /* @__PURE__ */ jsx5(ArrowLeft, { className: "w-6 h-6 text-black" })
+              className: "rpvs-p-3 rpvs-bg-white/60 rpvs-rounded-full hover:rpvs-bg-white/80 rpvs-cursor-pointer",
+              children: /* @__PURE__ */ jsx5(ArrowLeft, { className: "rpvs-w-6 rpvs-h-6 rpvs-text-black" })
             }
           ) : /* @__PURE__ */ jsx5("div", {}),
           index < products.length - 1 ? /* @__PURE__ */ jsx5(
             "button",
             {
               onClick: () => setIndex(index + 1),
-              className: "p-3 bg-white/60 rounded-full hover:bg-white/80 cursor-pointer",
-              children: /* @__PURE__ */ jsx5(ArrowRight, { className: "w-6 h-6 text-black" })
+              className: "rpvs-p-3 rpvs-bg-white/60 rpvs-rounded-full hover:rpvs-bg-white/80 rpvs-cursor-pointer",
+              children: /* @__PURE__ */ jsx5(ArrowRight, { className: "rpvs-w-6 rpvs-h-6 rpvs-text-black" })
             }
           ) : /* @__PURE__ */ jsx5("div", {})
         ] }),
-        /* @__PURE__ */ jsx5("div", { className: "w-full h-full flex justify-center items-center overflow-hidden", children: /* @__PURE__ */ jsxs3(
+        /* @__PURE__ */ jsx5("div", { className: "rpvs-w-full rpvs-h-full rpvs-flex rpvs-justify-center rpvs-items-center rpvs-overflow-hidden", children: /* @__PURE__ */ jsxs3(
           "div",
           {
-            className: `w-full max-w-lg md:max-w-2xl h-screen max-h-screen flex flex-col items-center bg-black text-white overflow-hidden rounded shadow-lg transition-all duration-300 ease-in-out 
-            ${animating ? "scale-95 opacity-50" : "scale-100 opacity-100"}`,
+            className: `rpvs-w-full rpvs-max-w-lg md:rpvs-max-w-2xl rpvs-h-screen rpvs-max-h-screen rpvs-flex rpvs-flex-col rpvs-items-center rpvs-bg-black rpvs-text-white rpvs-overflow-hidden rpvs-rounded rpvs-shadow-lg rpvs-transition-all rpvs-duration-300 rpvs-ease-in-out 
+            ${animating ? "rpvs-scale-95 rpvs-opacity-50" : "rpvs-scale-100 rpvs-opacity-100"}`,
             children: [
-              /* @__PURE__ */ jsx5("div", { className: "relative flex-grow w-full flex items-center justify-center bg-black", children: /* @__PURE__ */ jsx5(
+              /* @__PURE__ */ jsx5("div", { className: "rpvs-relative rpvs-flex-grow rpvs-w-full rpvs-flex rpvs-items-center rpvs-justify-center rpvs-bg-black", children: /* @__PURE__ */ jsx5(
                 VideoPlayer,
                 {
                   videoUrl: currentProduct.videoUrl,
                   videoConfig
                 }
               ) }),
-              /* @__PURE__ */ jsxs3("div", { className: "p-4 space-y-3 w-full bg-black/30", children: [
+              /* @__PURE__ */ jsxs3("div", { className: "rpvs-p-4 rpvs-space-y-3 rpvs-w-full rpvs-bg-black/30", children: [
                 contents && contents(currentProduct),
                 buttons && buttons(currentProduct)
               ] })
@@ -542,8 +538,18 @@ function useDeviceType() {
   return device;
 }
 
+// src/lib/style-injector.ts
+var injected = false;
+function injectStyles() {
+  if (injected || typeof document === "undefined") return;
+  injected = true;
+  const style = document.createElement("style");
+  style.textContent = `*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.rpvs-fixed{position:fixed}.rpvs-absolute{position:absolute}.rpvs-relative{position:relative}.rpvs-inset-0{inset:0}.rpvs-left-4{left:1rem}.rpvs-right-0{right:0}.rpvs-right-4{right:1rem}.rpvs-top-0{top:0}.rpvs-top-1{top:.25rem}.rpvs-top-1\\/2{top:50%}.rpvs-top-4{top:1rem}.rpvs-z-50{z-index:50}.rpvs-mb-4{margin-bottom:1rem}.rpvs-flex{display:flex}.rpvs-grid{display:grid}.rpvs-hidden{display:none}.rpvs-aspect-\\[4\\/5\\]{aspect-ratio:4/5}.rpvs-aspect-video{aspect-ratio:16/9}.rpvs-h-12{height:3rem}.rpvs-h-6{height:1.5rem}.rpvs-h-8{height:2rem}.rpvs-h-full{height:100%}.rpvs-h-screen{height:100vh}.rpvs-max-h-screen{max-height:100vh}.rpvs-min-h-\\[50vh\\]{min-height:50vh}.rpvs-min-h-screen{min-height:100vh}.rpvs-w-12{width:3rem}.rpvs-w-6{width:1.5rem}.rpvs-w-8{width:2rem}.rpvs-w-full{width:100%}.rpvs-min-w-\\[250px\\]{min-width:250px}.rpvs-min-w-full{min-width:100%}.rpvs-max-w-lg{max-width:32rem}.rpvs-max-w-sm{max-width:24rem}.rpvs-flex-shrink-0{flex-shrink:0}.rpvs-flex-grow{flex-grow:1}.-rpvs-translate-y-1{--tw-translate-y:-0.25rem}.-rpvs-translate-y-1,.-rpvs-translate-y-1\\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-rpvs-translate-y-1\\/2{--tw-translate-y:-50%}.rpvs-scale-100{--tw-scale-x:1;--tw-scale-y:1}.rpvs-scale-100,.rpvs-scale-95{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.rpvs-scale-95{--tw-scale-x:.95;--tw-scale-y:.95}@keyframes rpvs-spin{to{transform:rotate(1turn)}}.rpvs-animate-spin{animation:rpvs-spin 1s linear infinite}.rpvs-cursor-pointer{cursor:pointer}.rpvs-snap-x{scroll-snap-type:x var(--tw-scroll-snap-strictness)}.rpvs-snap-y{scroll-snap-type:y var(--tw-scroll-snap-strictness)}.rpvs-snap-mandatory{--tw-scroll-snap-strictness:mandatory}.rpvs-snap-start{scroll-snap-align:start}.rpvs-flex-row{flex-direction:row}.rpvs-flex-col{flex-direction:column}.rpvs-items-center{align-items:center}.rpvs-justify-center{justify-content:center}.rpvs-justify-between{justify-content:space-between}.rpvs-gap-5{gap:1.25rem}.rpvs-space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.rpvs-overflow-hidden{overflow:hidden}.rpvs-overflow-x-auto{overflow-x:auto}.rpvs-overflow-y-auto{overflow-y:auto}.rpvs-scroll-smooth{scroll-behavior:smooth}.rpvs-rounded{border-radius:.25rem}.rpvs-rounded-full{border-radius:9999px}.rpvs-border-4{border-width:4px}.rpvs-border-white{--tw-border-opacity:1;border-color:rgb(255 255 255/var(--tw-border-opacity,1))}.rpvs-border-t-transparent{border-top-color:transparent}.rpvs-bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.rpvs-bg-black\\/30{background-color:rgba(0,0,0,.3)}.rpvs-bg-black\\/90{background-color:rgba(0,0,0,.9)}.rpvs-bg-gray-600{--tw-bg-opacity:1;background-color:rgb(75 85 99/var(--tw-bg-opacity,1))}.rpvs-bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255/var(--tw-bg-opacity,1))}.rpvs-bg-white\\/60{background-color:hsla(0,0%,100%,.6)}.rpvs-p-1{padding:.25rem}.rpvs-p-3{padding:.75rem}.rpvs-p-4{padding:1rem}.rpvs-px-2{padding-left:.5rem;padding-right:.5rem}.rpvs-px-4{padding-left:1rem;padding-right:1rem}.rpvs-text-black{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.rpvs-text-red-500{--tw-text-opacity:1;color:rgb(239 68 68/var(--tw-text-opacity,1))}.rpvs-text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.rpvs-opacity-0{opacity:0}.rpvs-opacity-100{opacity:1}.rpvs-opacity-50{opacity:.5}.rpvs-shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color),0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.rpvs-transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.rpvs-transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.rpvs-duration-300{transition-duration:.3s}.rpvs-ease-in-out{transition-timing-function:cubic-bezier(.4,0,.2,1)}.rpvs-hide-scrollbar::-webkit-scrollbar{display:none}.rpvs-hide-scrollbar{scrollbar-width:none;-ms-overflow-style:none}.hover\\:rpvs-bg-white\\/80:hover{background-color:hsla(0,0%,100%,.8)}@media (min-width:768px){.md\\:rpvs-flex{display:flex}.md\\:rpvs-aspect-\\[5\\/6\\]{aspect-ratio:5/6}.md\\:rpvs-max-w-2xl{max-width:42rem}}`;
+  document.head.appendChild(style);
+}
+
 // src/components/ProductGrid.tsx
-import { Fragment as Fragment4, jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
+import { Fragment, jsx as jsx6, jsxs as jsxs4 } from "react/jsx-runtime";
 var ProductGrid = ({
   products,
   layout,
@@ -561,12 +567,16 @@ var ProductGrid = ({
   const device = useDeviceType();
   const { column, row } = layout[device];
   const [activeIndex, setActiveIndex] = useState5(null);
+  const [modalOpen, setModalOpen] = useState5(false);
   const slicedProducts = products.slice(0, maxItems);
   const itemsPerPage = column * row;
   const totalPages = Math.ceil(slicedProducts.length / itemsPerPage);
   const containerRef = useRef4(null);
   const initialPage = sliderDirection === "backward" ? totalPages - 1 : 0;
   const [currentPage, setCurrentPage] = useState5(initialPage);
+  useEffect5(() => {
+    injectStyles();
+  }, []);
   const scrollToPage = (page) => {
     if (containerRef.current) {
       const width = containerRef.current.clientWidth;
@@ -596,7 +606,7 @@ var ProductGrid = ({
     scrollToPage(prevPage);
   };
   useEffect5(() => {
-    if (!slide) return;
+    if (!slide || modalOpen) return;
     const interval = setInterval(() => {
       if (sliderDirection === "forward") {
         handleNext();
@@ -611,9 +621,9 @@ var ProductGrid = ({
       setActiveIndex(null);
     }
   }, [slicedProducts, activeIndex]);
-  return /* @__PURE__ */ jsxs4(Fragment4, { children: [
+  return /* @__PURE__ */ jsxs4(Fragment, { children: [
     /* @__PURE__ */ jsxs4("div", { children: [
-      sectionHeader && /* @__PURE__ */ jsx6("div", { className: "mb-4", children: sectionHeader({
+      sectionHeader && /* @__PURE__ */ jsx6("div", { className: "rpvs-mb-4", children: sectionHeader({
         handleNext,
         handlePrev,
         isSliding: slide
@@ -622,9 +632,11 @@ var ProductGrid = ({
         "div",
         {
           ref: containerRef,
-          className: "w-full overflow-x-auto snap-x scroll-smooth hide-scrollbar",
-          style: { scrollSnapType: "x mandatory" },
-          children: /* @__PURE__ */ jsx6("div", { className: "flex", children: [...Array(totalPages)].map((_, pageIndex) => {
+          className: "rpvs-w-full rpvs-overflow-x-auto rpvs-snap-x rpvs-scroll-smooth rpvs-hide-scrollbar",
+          style: {
+            scrollSnapType: "x mandatory"
+          },
+          children: /* @__PURE__ */ jsx6("div", { className: "rpvs-flex", children: [...Array(totalPages)].map((_, pageIndex) => {
             const pageItems = slicedProducts.slice(
               pageIndex * itemsPerPage,
               (pageIndex + 1) * itemsPerPage
@@ -632,12 +644,12 @@ var ProductGrid = ({
             return /* @__PURE__ */ jsx6(
               "div",
               {
-                className: "w-full flex-shrink-0 snap-start px-2",
+                className: "rpvs-w-full rpvs-flex-shrink-0 rpvs-snap-start rpvs-px-2",
                 style: { width: "100%" },
                 children: /* @__PURE__ */ jsx6(
                   "div",
                   {
-                    className: `grid gap-5 `,
+                    className: "rpvs-grid rpvs-gap-5",
                     style: {
                       gridTemplateColumns: `repeat(${column}, minmax(0, 1fr))`,
                       gridTemplateRows: `repeat(${row}, minmax(0, 1fr))`
@@ -650,7 +662,10 @@ var ProductGrid = ({
                         contents: contents ? contents(product) : void 0,
                         buttons: buttons ? buttons(product) : void 0,
                         expandCard,
-                        onExpand: () => setActiveIndex(pageIndex * itemsPerPage + index)
+                        onExpand: () => {
+                          setActiveIndex(pageIndex * itemsPerPage + index);
+                          setModalOpen(true);
+                        }
                       },
                       product.id
                     ))
@@ -684,256 +699,7 @@ var ProductGrid = ({
     ))
   ] });
 };
-
-// src/data/mockProducts.ts
-var mockProducts = [
-  {
-    id: "1",
-    title: "Sample YouTube Video 1",
-    price: 99.99,
-    discountPrice: 79.99,
-    videoUrl: "https://www.youtube.com/watch?v=GMniyQIc1eU",
-    currency: "BDT"
-  },
-  {
-    id: "2",
-    title: "Facebook Video 1",
-    price: 49.99,
-    videoUrl: "https://www.facebook.com/worldchampionshipsofperformingarts/videos/1024342002495478/",
-    currency: "BDT"
-  },
-  {
-    id: "3",
-    title: "Sample YouTube Short 1",
-    price: 99.99,
-    discountPrice: 69.99,
-    videoUrl: "https://www.facebook.com/RIARVG/videos/tom-and-jerry-classic-cartoon/554552160781061/",
-    currency: "BDT"
-  },
-  {
-    id: "4",
-    title: "Sample YouTube Video 2",
-    price: 99.99,
-    discountPrice: 59.99,
-    videoUrl: "https://www.youtube.com/watch?v=WHQguqyEtYc",
-    currency: "BDT"
-  },
-  {
-    id: "5",
-    title: "Facebook Video 2",
-    price: 99.99,
-    discountPrice: 49.99,
-    videoUrl: "https://www.facebook.com/100063942909772/videos/1977140266150386/?__so__=permalink",
-    currency: "BDT"
-  },
-  {
-    id: "6",
-    title: "Sample YouTube Short 2",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.youtube.com/shorts/gu1HAFFemWk",
-    currency: "BDT"
-  },
-  {
-    id: "7",
-    title: "Sample YouTube Video 3",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.youtube.com/watch?v=CPwdL44yLMg",
-    currency: "BDT"
-  },
-  {
-    id: "8",
-    title: "Facebook Video 3",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.facebook.com/100063942909772/videos/9716186258508922/?__so__=permalink",
-    currency: "BDT"
-  },
-  {
-    id: "9",
-    title: "Sample Youtube Short 3",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.youtube.com/shorts/I9rttzYnDmw",
-    currency: "BDT"
-  },
-  {
-    id: "10",
-    title: "Sample YouTube Video 4",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.youtube.com/watch?v=QYotv1aOK3g",
-    currency: "BDT"
-  },
-  {
-    id: "11",
-    title: "Facebook Video 4",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.facebook.com/100063942909772/videos/1264272745133478/?__so__=permalink",
-    currency: "BDT"
-  },
-  {
-    id: "12",
-    title: "Sample Youtube Short 4",
-    price: 99.99,
-    discountPrice: 39.99,
-    videoUrl: "https://www.youtube.com/shorts/L08GfrUOnPM",
-    currency: "BDT"
-  }
-];
-
-// src/App.tsx
-import { Fragment as Fragment5, jsx as jsx7, jsxs as jsxs5 } from "react/jsx-runtime";
-function App() {
-  const renderSectionHeader = ({
-    handleNext,
-    handlePrev,
-    isSliding
-  }) => /* @__PURE__ */ jsxs5("div", { className: "flex justify-between items-center gap-4 my-4", children: [
-    isSliding && /* @__PURE__ */ jsxs5("div", { className: "flex gap-2", children: [
-      /* @__PURE__ */ jsx7(
-        "button",
-        {
-          className: "p-3 bg-gray-300 text-black cursor-pointer rounded-full",
-          onClick: handlePrev,
-          children: /* @__PURE__ */ jsx7(ArrowLeft, { className: "text-black w-6 h-5" })
-        }
-      ),
-      /* @__PURE__ */ jsx7(
-        "button",
-        {
-          className: "p-3 bg-gray-300 text-black cursor-pointer rounded-full",
-          onClick: handleNext,
-          children: /* @__PURE__ */ jsx7(ArrowRight, { className: "text-black w-6 h-5" })
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxs5("h1", { className: "text-2xl font-bold text-center underline uppercase", children: [
-      "Video Products ",
-      /* @__PURE__ */ jsx7("small", { children: "(backward - horizontal)" })
-    ] })
-  ] });
-  const renderContents = (product) => {
-    return /* @__PURE__ */ jsxs5(Fragment5, { children: [
-      /* @__PURE__ */ jsx7("div", { className: "hidden md:block", children: /* @__PURE__ */ jsxs5("div", { className: "flex justify-between items-center gap-3 w-full my-1.5", children: [
-        /* @__PURE__ */ jsx7("h3", { className: "text-medium font-semibold text-primary", children: product.title }),
-        /* @__PURE__ */ jsxs5("div", { className: " font-semibold text-primary flex items-center gap-1", children: [
-          product.currency,
-          " ",
-          (product?.discountPrice ?? 0) > 0 && (product?.discountPrice ?? 0) < product.price ? /* @__PURE__ */ jsxs5("div", { children: [
-            /* @__PURE__ */ jsx7("span", { className: "line-through text-gray-500 text-md", children: product.price }),
-            /* @__PURE__ */ jsx7("span", { className: "text-gray-700 ml-2 text-xl", children: product.discountPrice })
-          ] }) : /* @__PURE__ */ jsx7("span", { className: "text-gray-700 ml-2 text-xl", children: product.price })
-        ] })
-      ] }) }),
-      /* @__PURE__ */ jsxs5("div", { className: "block md:hidden", children: [
-        /* @__PURE__ */ jsx7("h3", { className: "text-medium font-semibold text-primary", children: product.title }),
-        /* @__PURE__ */ jsxs5("div", { className: " font-semibold text-primary flex items-center gap-1", children: [
-          product.currency,
-          " ",
-          (product?.discountPrice ?? 0) > 0 && (product?.discountPrice ?? 0) < product.price ? /* @__PURE__ */ jsxs5("div", { children: [
-            /* @__PURE__ */ jsx7("span", { className: "line-through text-gray-500 text-md", children: product.price }),
-            /* @__PURE__ */ jsx7("span", { className: "text-gray-700 ml-2 text-xl", children: product.discountPrice })
-          ] }) : /* @__PURE__ */ jsx7("span", { className: "text-gray-700 ml-2 text-xl", children: product.price })
-        ] })
-      ] })
-    ] });
-  };
-  const renderButtons = (product) => {
-    return /* @__PURE__ */ jsxs5(Fragment5, { children: [
-      /* @__PURE__ */ jsx7("div", { className: "hidden md:block", children: /* @__PURE__ */ jsxs5("div", { className: "flex justify-between items-center gap-3 w-full my-1.5", children: [
-        /* @__PURE__ */ jsx7(
-          "button",
-          {
-            className: "bg-gray-300 text-center py-2 w-[30%] text-md rounded cursor-pointer",
-            onClick: () => console.log(`Add to Cart`, product.id),
-            children: "Add to Cart"
-          }
-        ),
-        /* @__PURE__ */ jsx7(
-          "button",
-          {
-            className: "bg-gray-300 text-center py-2 w-[70%] text-md rounded cursor-pointer",
-            onClick: () => console.log(`Buy Now`, product.id),
-            children: "Buy Now"
-          }
-        )
-      ] }) }),
-      /* @__PURE__ */ jsx7("div", { className: "block md:hidden", children: /* @__PURE__ */ jsxs5("div", { className: "flex flex-col gap-3 w-full my-1.5", children: [
-        /* @__PURE__ */ jsx7(
-          "button",
-          {
-            className: "bg-gray-300 text-center py-2 text-md rounded cursor-pointer",
-            onClick: () => console.log(`Add to Cart`, product.id),
-            children: "Add to Cart"
-          }
-        ),
-        /* @__PURE__ */ jsx7(
-          "button",
-          {
-            className: "bg-gray-300 text-center py-2 text-md rounded cursor-pointer",
-            onClick: () => console.log(`Buy Now`, product.id),
-            children: "Buy Now"
-          }
-        )
-      ] }) })
-    ] });
-  };
-  return /* @__PURE__ */ jsx7(Fragment5, { children: /* @__PURE__ */ jsx7("div", { className: "", children: /* @__PURE__ */ jsx7("div", { className: "p-5 md:p-10 lg:px-20", children: /* @__PURE__ */ jsx7(
-    ProductGrid,
-    {
-      products: mockProducts,
-      layout: {
-        desktop: { column: 4, row: 1 },
-        tablet: { column: 3, row: 1 },
-        mobile: { column: 2, row: 1 }
-      },
-      maxItems: 12,
-      videoConfig: {
-        autoplay: true,
-        mute: true,
-        loop: false,
-        controls: true,
-        modestBranding: false,
-        rel: false,
-        showInfo: false,
-        facebookAllowFullscreen: true,
-        show_text: false
-      },
-      sectionHeader: renderSectionHeader,
-      contents: (product) => renderContents(product),
-      buttons: (product) => renderButtons(product),
-      slide: true,
-      slideInterval: 5e3,
-      sliderDirection: "backward",
-      expandCard: true,
-      expandCardSlide: "horizontal"
-    }
-  ) }) }) });
-}
-var App_default = App;
-
-// src/reportWebVitals.ts
-var reportWebVitals = (onPerfEntry) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    import("web-vitals").then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(onPerfEntry);
-      getFID(onPerfEntry);
-      getFCP(onPerfEntry);
-      getLCP(onPerfEntry);
-      getTTFB(onPerfEntry);
-    });
-  }
+export {
+  ProductGrid
 };
-var reportWebVitals_default = reportWebVitals;
-
-// src/index.tsx
-import { jsx as jsx8 } from "react/jsx-runtime";
-ReactDOM.render(
-  /* @__PURE__ */ jsx8(React4.StrictMode, { children: /* @__PURE__ */ jsx8(App_default, {}) }),
-  document.getElementById("root")
-);
-reportWebVitals_default();
 //# sourceMappingURL=index.mjs.map

@@ -1,12 +1,17 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ['src/index.tsx'],
-  format: ['esm', 'cjs'],
-  dts: true,                
+  entry: ["src/lib/index.ts"],
+  format: ["esm"],
+  outExtension({ format }) {
+    return {
+      js: format === "esm" ? ".mjs" : ".js",
+    };
+  },
+  dts: true,
   sourcemap: true,
   clean: true,
-  outDir: 'dist',
-  target: 'esnext',
-  splitting: false         
+  splitting: false,
+  target: "esnext",
+  external: ["react", "react-dom", "react/jsx-runtime"],
 });

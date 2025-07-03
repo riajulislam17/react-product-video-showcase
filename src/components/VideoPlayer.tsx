@@ -27,7 +27,7 @@ export const VideoPlayer: React.FC<Props> = ({
   const { platform, videoId, embedUrl, error } = useVideoPlatform(videoUrl);
 
   if (error) {
-    return <div className="text-red-500">{error}</div>;
+    return <div className="rpvs-text-red-500">{error}</div>;
   }
 
   const queryParams = new URLSearchParams();
@@ -42,7 +42,6 @@ export const VideoPlayer: React.FC<Props> = ({
     queryParams.set("controls", videoConfig.controls ? "1" : "0");
     queryParams.set("modestbranding", videoConfig.modestBranding ? "1" : "0");
     queryParams.set("rel", videoConfig.rel ? "1" : "0");
-    // queryParams.set("showinfo", videoConfig.showInfo ? "1" : "0");
   }
   if (platform === "facebook" && videoConfig.show_text === false) {
     queryParams.set("show_text", "false");
@@ -53,34 +52,30 @@ export const VideoPlayer: React.FC<Props> = ({
   }${queryParams.toString()}`;
 
   return (
-    <>
-      <div
-        ref={ref}
-        className="min-w-full min-h-[50vh] aspect-video bg-black relative rounded overflow-hidden"
-      >
-        {isVisible ? (
-          <iframe
-            title={`Embedded ${platform} video`}
-              loading="lazy"
-            src={finalEmbedUrl}
-            width="100%"
-            height={platform === "facebook" ? "500" : "100%"}
-            className={platform === "youtube" ? "w-full h-full" : ""}
-            allow="autoplay; encrypted-media"
-            allowFullScreen={
-              platform === "facebook"
-                ? videoConfig.facebookAllowFullscreen
-                : true
-            }
-          />
-        ) : (
-          <div className="w-full h-full bg-gray-600 relative">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin" />
-            </div>
+    <div
+      ref={ref}
+      className="rpvs-min-w-full rpvs-min-h-[50vh] rpvs-aspect-video rpvs-bg-black rpvs-relative rpvs-rounded rpvs-overflow-hidden"
+    >
+      {isVisible ? (
+        <iframe
+          title={`Embedded ${platform} video`}
+          loading="lazy"
+          src={finalEmbedUrl}
+          width="100%"
+          height={platform === "facebook" ? "500" : "100%"}
+          className={platform === "youtube" ? "rpvs-w-full rpvs-h-full" : ""}
+          allow="autoplay; encrypted-media"
+          allowFullScreen={
+            platform === "facebook" ? videoConfig.facebookAllowFullscreen : true
+          }
+        />
+      ) : (
+        <div className="rpvs-w-full rpvs-h-full rpvs-bg-gray-600 rpvs-relative">
+          <div className="rpvs-absolute rpvs-inset-0 rpvs-flex rpvs-items-center rpvs-justify-center">
+            <div className="rpvs-w-12 rpvs-h-12 rpvs-border-4 rpvs-border-white rpvs-border-t-transparent rpvs-rounded-full rpvs-animate-spin" />
           </div>
-        )}
-      </div>
-    </>
+        </div>
+      )}
+    </div>
   );
 };

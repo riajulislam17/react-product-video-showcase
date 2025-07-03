@@ -4,6 +4,7 @@ import { ProductModalY } from "./ProductModalY";
 import { ProductModalX } from "./ProductModalX";
 import { Product, VideoConfig } from "../types";
 import { useDeviceType } from "../hooks/useDeviceType";
+import { injectStyles } from "../lib/style-injector";
 
 interface Props {
   products: Product[];
@@ -45,6 +46,7 @@ export const ProductGrid: React.FC<Props> = ({
   const device = useDeviceType();
   const { column, row } = layout[device];
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const slicedProducts = products.slice(0, maxItems);
   const itemsPerPage = column * row;
   const totalPages = Math.ceil(slicedProducts.length / itemsPerPage);
@@ -52,6 +54,10 @@ export const ProductGrid: React.FC<Props> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const initialPage = sliderDirection === "backward" ? totalPages - 1 : 0;
   const [currentPage, setCurrentPage] = useState(initialPage);
+
+  useEffect(() => {
+    injectStyles();
+  }, []);
 
   const scrollToPage = (page: number) => {
     if (containerRef.current) {
@@ -86,7 +92,7 @@ export const ProductGrid: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    if (!slide) return;
+    if (!slide || modalOpen) return;
 
     const interval = setInterval(() => {
       if (sliderDirection === "forward") {
@@ -109,7 +115,7 @@ export const ProductGrid: React.FC<Props> = ({
     <>
       <div>
         {sectionHeader && (
-          <div className="mb-4">
+          <div className="rpvs-mb-4">
             {sectionHeader({
               handleNext,
               handlePrev,
@@ -120,10 +126,12 @@ export const ProductGrid: React.FC<Props> = ({
 
         <div
           ref={containerRef}
-          className="w-full overflow-x-auto snap-x scroll-smooth hide-scrollbar"
-          style={{ scrollSnapType: "x mandatory" }}
+          className="rpvs-w-full rpvs-overflow-x-auto rpvs-snap-x rpvs-scroll-smooth rpvs-hide-scrollbar"
+          style={{
+            scrollSnapType: "x mandatory",
+          }}
         >
-          <div className="flex">
+          <div className="rpvs-flex">
             {[...Array(totalPages)].map((_, pageIndex) => {
               const pageItems = slicedProducts.slice(
                 pageIndex * itemsPerPage,
@@ -133,11 +141,11 @@ export const ProductGrid: React.FC<Props> = ({
               return (
                 <div
                   key={pageIndex}
-                  className="w-full flex-shrink-0 snap-start px-2"
+                  className="rpvs-w-full rpvs-flex-shrink-0 rpvs-snap-start rpvs-px-2"
                   style={{ width: "100%" }}
                 >
                   <div
-                    className={`grid gap-5 `}
+                    className="rpvs-grid rpvs-gap-5"
                     style={{
                       gridTemplateColumns: `repeat(${column}, minmax(0, 1fr))`,
                       gridTemplateRows: `repeat(${row}, minmax(0, 1fr))`,
@@ -151,9 +159,10 @@ export const ProductGrid: React.FC<Props> = ({
                         contents={contents ? contents(product) : undefined}
                         buttons={buttons ? buttons(product) : undefined}
                         expandCard={expandCard}
-                        onExpand={() =>
-                          setActiveIndex(pageIndex * itemsPerPage + index)
-                        }
+                        onExpand={() => {
+                          setActiveIndex(pageIndex * itemsPerPage + index);
+                          setModalOpen(true);
+                        }}
                       />
                     ))}
                   </div>

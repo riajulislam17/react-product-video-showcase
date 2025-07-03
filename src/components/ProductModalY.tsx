@@ -30,17 +30,14 @@ export const ProductModalY: React.FC<ExpandedProductModalProps> = ({
     return () => document.body.classList.remove("overflow-hidden");
   }, []);
 
-  // Initial scroll to activeIndex
   useEffect(() => {
     if (containerRef.current && cardRefs.current[index]) {
       cardRefs.current[index]?.scrollIntoView({
-        // behavior: "instant",
         block: "start",
       });
     }
   }, [index]);
 
-  // Animate scroll & card transition on index change
   useEffect(() => {
     if (containerRef.current && cardRefs.current[index]) {
       setAnimating(true);
@@ -53,7 +50,6 @@ export const ProductModalY: React.FC<ExpandedProductModalProps> = ({
     }
   }, [index]);
 
-  // Swipe gesture for mobile
   const touchStartY = useRef<number | null>(null);
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartY.current = e.touches[0].clientY;
@@ -67,85 +63,84 @@ export const ProductModalY: React.FC<ExpandedProductModalProps> = ({
   };
 
   return (
-    <>
-      <div
-        className="fixed inset-0 z-50 bg-black/90 flex justify-center items-center transition-opacity"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        role="dialog"
-        aria-modal="true"
+    <div
+      className="rpvs-fixed rpvs-inset-0 rpvs-z-50 rpvs-bg-black/90 rpvs-flex rpvs-justify-center rpvs-items-center rpvs-transition-opacity"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      role="dialog"
+      aria-modal="true"
+    >
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="rpvs-absolute rpvs-top-4 rpvs-left-4 rpvs-z-50 rpvs-text-white rpvs-cursor-pointer"
+        aria-label="Close modal"
       >
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 left-4 z-50 text-white cursor-pointer"
-        >
-          <Minimize aria-label="Close modal" className="w-6 h-6 text-white" />
-        </button>
+        <Minimize className="rpvs-w-6 rpvs-h-6 rpvs-text-white" />
+      </button>
 
-        {/* Prev/Next buttons - only on md+ */}
-        <div className="hidden md:flex flex-col absolute right-4 top-1/2 -translate-y-1/2 z-50 space-y-3">
-          {index > 0 ? (
-            <button
-              onClick={() => setIndex(index - 1)}
-              className="p-3 bg-white/60 rounded-full hover:bg-white/80 cursor-pointer"
-            >
-              <ArrowUp className="w-6 h-6 text-black" />
-            </button>
-          ) : (
-            <button />
-          )}
-          {index < products.length - 1 ? (
-            <button
-              onClick={() => setIndex(index + 1)}
-              className="p-3 bg-white/60 rounded-full hover:bg-white/80 cursor-pointer"
-            >
-              <ArrowDown className="w-6 h-6 text-black" />
-            </button>
-          ) : (
-            <button />
-          )}
-        </div>
+      {/* Prev/Next buttons (vertical navigation) */}
+      <div className="rpvs-hidden md:rpvs-flex rpvs-flex-col rpvs-absolute rpvs-right-4 rpvs-top-1/2 -rpvs-translate-y-1/2 rpvs-z-50 rpvs-space-y-3">
+        {index > 0 ? (
+          <button
+            onClick={() => setIndex(index - 1)}
+            className="rpvs-p-3 rpvs-bg-white/60 rpvs-rounded-full hover:rpvs-bg-white/80 rpvs-cursor-pointer"
+          >
+            <ArrowUp className="rpvs-w-6 rpvs-h-6 rpvs-text-black" />
+          </button>
+        ) : (
+          <button disabled className="rpvs-opacity-0" />
+        )}
+        {index < products.length - 1 ? (
+          <button
+            onClick={() => setIndex(index + 1)}
+            className="rpvs-p-3 rpvs-bg-white/60 rpvs-rounded-full hover:rpvs-bg-white/80 rpvs-cursor-pointer"
+          >
+            <ArrowDown className="rpvs-w-6 rpvs-h-6 rpvs-text-black" />
+          </button>
+        ) : (
+          <button disabled className="rpvs-opacity-0" />
+        )}
+      </div>
 
-        {/* Scroll container */}
-        <div
-          ref={containerRef}
-          className="w-full h-full overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar"
-        >
-          {products.map((product, i) => (
+      {/* Scrollable container */}
+      <div
+        ref={containerRef}
+        className="rpvs-w-full rpvs-h-full rpvs-overflow-y-auto rpvs-snap-y rpvs-snap-mandatory rpvs-scroll-smooth rpvs-hide-scrollbar"
+      >
+        {products.map((product, i) => (
+          <div
+            key={product.id}
+            ref={(el) => {
+              cardRefs.current[i] = el;
+            }}
+            className="rpvs-w-full rpvs-min-h-screen rpvs-snap-start rpvs-flex rpvs-justify-center rpvs-items-center"
+          >
             <div
-             key={product.id}
-              ref={(el) => {
-                cardRefs.current[i] = el;
-              }}
-              className="w-full min-h-screen snap-start flex justify-center items-center"
+              className={`rpvs-w-full rpvs-max-w-lg md:rpvs-max-w-2xl rpvs-h-screen rpvs-max-h-screen rpvs-flex rpvs-flex-col rpvs-items-center rpvs-bg-black rpvs-text-white rpvs-overflow-hidden rpvs-rounded rpvs-shadow-lg rpvs-transition-all rpvs-duration-300 rpvs-ease-in-out 
+              ${
+                animating && i === index
+                  ? "rpvs-scale-95 rpvs-opacity-50"
+                  : "rpvs-scale-100 rpvs-opacity-100"
+              }`}
             >
-              <div
-                className={`w-full max-w-lg md:max-w-2xl h-screen max-h-screen flex flex-col items-center bg-black text-white overflow-hidden rounded shadow-lg transition-all duration-300 ease-in-out 
-                ${
-                  animating && i === index
-                    ? "scale-95 opacity-50"
-                    : "scale-100 opacity-100"
-                }`}
-              >
-                {/* Video */}
-                <div className="relative flex-grow w-full flex items-center justify-center bg-black">
-                  <VideoPlayer
-                    videoUrl={product.videoUrl}
-                    videoConfig={videoConfig}
-                  />
-                </div>
+              {/* Video */}
+              <div className="rpvs-relative rpvs-flex-grow rpvs-w-full rpvs-flex rpvs-items-center rpvs-justify-center rpvs-bg-black">
+                <VideoPlayer
+                  videoUrl={product.videoUrl}
+                  videoConfig={videoConfig}
+                />
+              </div>
 
-                {/* Contents */}
-                <div className="p-4 space-y-3 w-full bg-black/30">
-                  {contents && contents(product)}
-                  {buttons && buttons(product)}
-                </div>
+              {/* Contents */}
+              <div className="rpvs-p-4 rpvs-space-y-3 rpvs-w-full rpvs-bg-black/30">
+                {contents && contents(product)}
+                {buttons && buttons(product)}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   );
 };

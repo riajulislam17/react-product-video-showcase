@@ -1,19 +1,23 @@
 import { VideoConfig } from "../types";
 
 export const defaultVideoConfig: VideoConfig = {
-  autoplay: false, //  Both YouTube & Facebook
-  mute: true, // YouTube (limited support on Facebook)
-  loop: false, // YouTube only
+  //  for youtube
+  autoplay: false,
+  mute: false,
+  controls: false,
+  modestbranding: false,
+  rel: false,
+  loop: false,
+  playlist: false,
+  cc_load_policy: false,
+  disablekb: false,
 
-  // --- YouTube-specific options ---
-  controls: false, //  YouTube (show/hide player controls)
-  modestBranding: false, //  YouTube (removes YouTube logo)
-  rel: false, //  YouTube (disable suggested videos at end)
-  showInfo: false, //  YouTube (deprecated, use modestBranding + rel)
-
-  // --- Facebook-specific options ---
-  facebookAllowFullscreen: true, //  Facebook (enable fullscreen support)
-  show_text: false, //  Facebook (hide video caption text)
+  // for facebook
+  "data-autoplay": false,
+  "data-show-text": false,
+  "data-allowfullscreen": false,
+  "data-show-captions": false,
+  "data-allow-script-access": "never",
 };
 
 export function mergeVideoConfig(

@@ -1,18 +1,7 @@
 import React from "react";
 import { useLazyLoad } from "../hooks/useLazyLoad";
 import { useVideoPlatform } from "../hooks/useVideoPlatform";
-
-interface VideoConfig {
-  autoplay?: boolean;
-  mute?: boolean;
-  loop?: boolean;
-  controls?: boolean;
-  modestBranding?: boolean;
-  rel?: boolean;
-  showInfo?: boolean;
-  show_text?: boolean;
-  facebookAllowFullscreen?: boolean;
-}
+import { VideoConfig } from "../types";
 
 interface Props {
   videoUrl: string;
@@ -32,19 +21,37 @@ export const VideoPlayer: React.FC<Props> = ({
 
   const queryParams = new URLSearchParams();
 
-  if (videoConfig.autoplay) queryParams.set("autoplay", "1");
-  if (videoConfig.mute) queryParams.set("mute", "1");
-  if (platform === "youtube" && videoConfig.loop && videoId) {
-    queryParams.set("loop", "1");
-    queryParams.set("playlist", videoId);
-  }
+  //  YouTube Parameters
   if (platform === "youtube") {
-    queryParams.set("controls", videoConfig.controls ? "1" : "0");
-    queryParams.set("modestbranding", videoConfig.modestBranding ? "1" : "0");
-    queryParams.set("rel", videoConfig.rel ? "1" : "0");
+    if (videoConfig.autoplay) queryParams.set("autoplay", "1");
+    if (videoConfig.mute) queryParams.set("mute", "1");
+    if (videoConfig.controls !== undefined)
+      queryParams.set("controls", videoConfig.controls ? "1" : "0");
+    if (videoConfig.modestbranding) queryParams.set("modestbranding", "1");
+    if (videoConfig.rel !== undefined)
+      queryParams.set("rel", videoConfig.rel ? "1" : "0");
+    if (videoConfig.loop && videoId) {
+      queryParams.set("loop", "1");
+      queryParams.set("playlist", videoId);
+    }
+    if (videoConfig.cc_load_policy) queryParams.set("cc_load_policy", "1");
+    if (videoConfig.disablekb) queryParams.set("disablekb", "1");
   }
-  if (platform === "facebook" && videoConfig.show_text === false) {
-    queryParams.set("show_text", "false");
+
+  //  Facebook Parameters (these are `data-*` in HTML, but must be added to iframe as query)
+  if (platform === "facebook") {
+    if (videoConfig["data-autoplay"]) queryParams.set("autoplay", "true");
+    if (videoConfig["data-show-text"] === false)
+      queryParams.set("show_text", "false");
+    if (videoConfig["data-allowfullscreen"])
+      queryParams.set("allowfullscreen", "true");
+    if (videoConfig["data-show-captions"])
+      queryParams.set("show_captions", "true");
+    if (videoConfig["data-allow-script-access"])
+      queryParams.set(
+        "allowScriptAccess",
+        videoConfig["data-allow-script-access"]
+      );
   }
 
   const finalEmbedUrl = `${embedUrl}${
@@ -65,9 +72,6 @@ export const VideoPlayer: React.FC<Props> = ({
           height={platform === "facebook" ? "500" : "100%"}
           className={platform === "youtube" ? "rpvs-w-full rpvs-h-full" : ""}
           allow="autoplay; encrypted-media"
-          allowFullScreen={
-            platform === "facebook" ? videoConfig.facebookAllowFullscreen : true
-          }
         />
       ) : (
         <div className="rpvs-w-full rpvs-h-full rpvs-bg-gray-600 rpvs-relative">

@@ -3,26 +3,22 @@ import { useEffect as useEffect5, useRef as useRef4, useState as useState5 } fro
 
 // src/utils/videoConfig.ts
 var defaultVideoConfig = {
+  //  for youtube
   autoplay: false,
-  //  Both YouTube & Facebook
-  mute: true,
-  // YouTube (limited support on Facebook)
-  loop: false,
-  // YouTube only
-  // --- YouTube-specific options ---
+  mute: false,
   controls: false,
-  //  YouTube (show/hide player controls)
-  modestBranding: false,
-  //  YouTube (removes YouTube logo)
+  modestbranding: false,
   rel: false,
-  //  YouTube (disable suggested videos at end)
-  showInfo: false,
-  //  YouTube (deprecated, use modestBranding + rel)
-  // --- Facebook-specific options ---
-  facebookAllowFullscreen: true,
-  //  Facebook (enable fullscreen support)
-  show_text: false
-  //  Facebook (hide video caption text)
+  loop: false,
+  playlist: false,
+  cc_load_policy: false,
+  disablekb: false,
+  // for facebook
+  "data-autoplay": false,
+  "data-show-text": false,
+  "data-allowfullscreen": false,
+  "data-show-captions": false,
+  "data-allow-script-access": "never"
 };
 function mergeVideoConfig(userConfig) {
   return {
@@ -151,19 +147,34 @@ var VideoPlayer = ({
     return /* @__PURE__ */ jsx("div", { className: "rpvs-text-red-500", children: error });
   }
   const queryParams = new URLSearchParams();
-  if (videoConfig.autoplay) queryParams.set("autoplay", "1");
-  if (videoConfig.mute) queryParams.set("mute", "1");
-  if (platform === "youtube" && videoConfig.loop && videoId) {
-    queryParams.set("loop", "1");
-    queryParams.set("playlist", videoId);
-  }
   if (platform === "youtube") {
-    queryParams.set("controls", videoConfig.controls ? "1" : "0");
-    queryParams.set("modestbranding", videoConfig.modestBranding ? "1" : "0");
-    queryParams.set("rel", videoConfig.rel ? "1" : "0");
+    if (videoConfig.autoplay) queryParams.set("autoplay", "1");
+    if (videoConfig.mute) queryParams.set("mute", "1");
+    if (videoConfig.controls !== void 0)
+      queryParams.set("controls", videoConfig.controls ? "1" : "0");
+    if (videoConfig.modestbranding) queryParams.set("modestbranding", "1");
+    if (videoConfig.rel !== void 0)
+      queryParams.set("rel", videoConfig.rel ? "1" : "0");
+    if (videoConfig.loop && videoId) {
+      queryParams.set("loop", "1");
+      queryParams.set("playlist", videoId);
+    }
+    if (videoConfig.cc_load_policy) queryParams.set("cc_load_policy", "1");
+    if (videoConfig.disablekb) queryParams.set("disablekb", "1");
   }
-  if (platform === "facebook" && videoConfig.show_text === false) {
-    queryParams.set("show_text", "false");
+  if (platform === "facebook") {
+    if (videoConfig["data-autoplay"]) queryParams.set("autoplay", "true");
+    if (videoConfig["data-show-text"] === false)
+      queryParams.set("show_text", "false");
+    if (videoConfig["data-allowfullscreen"])
+      queryParams.set("allowfullscreen", "true");
+    if (videoConfig["data-show-captions"])
+      queryParams.set("show_captions", "true");
+    if (videoConfig["data-allow-script-access"])
+      queryParams.set(
+        "allowScriptAccess",
+        videoConfig["data-allow-script-access"]
+      );
   }
   const finalEmbedUrl = `${embedUrl}${embedUrl?.includes("?") ? "&" : "?"}${queryParams.toString()}`;
   return /* @__PURE__ */ jsx(
@@ -180,8 +191,7 @@ var VideoPlayer = ({
           width: "100%",
           height: platform === "facebook" ? "500" : "100%",
           className: platform === "youtube" ? "rpvs-w-full rpvs-h-full" : "",
-          allow: "autoplay; encrypted-media",
-          allowFullScreen: platform === "facebook" ? videoConfig.facebookAllowFullscreen : true
+          allow: "autoplay; encrypted-media"
         }
       ) : /* @__PURE__ */ jsx("div", { className: "rpvs-w-full rpvs-h-full rpvs-bg-gray-600 rpvs-relative", children: /* @__PURE__ */ jsx("div", { className: "rpvs-absolute rpvs-inset-0 rpvs-flex rpvs-items-center rpvs-justify-center", children: /* @__PURE__ */ jsx("div", { className: "rpvs-w-12 rpvs-h-12 rpvs-border-4 rpvs-border-white rpvs-border-t-transparent rpvs-rounded-full rpvs-animate-spin" }) }) })
     }

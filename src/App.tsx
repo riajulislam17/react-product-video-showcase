@@ -140,6 +140,26 @@ function App() {
     );
   };
 
+  const videoConfig = {
+    //  for youtube
+    autoplay: false,
+    mute: false,
+    controls: false,
+    modestbranding: false,
+    rel: false,
+    loop: false,
+    playlist: false,
+    cc_load_policy: false,
+    disablekb: false,
+
+    // for facebook
+    "data-autoplay": false,
+    "data-show-text": false,
+    "data-allowfullscreen": false,
+    "data-show-captions": false,
+    "data-allow-script-access": "never" as "never",
+  };
+
   return (
     <>
       <div className="">
@@ -152,17 +172,7 @@ function App() {
               mobile: { column: 2, row: 1 },
             }}
             maxItems={12}
-            videoConfig={{
-              autoplay: true,
-              mute: true,
-              loop: false,
-              controls: true,
-              modestBranding: false,
-              rel: false,
-              showInfo: false,
-              facebookAllowFullscreen: true,
-              show_text: false,
-            }}
+            videoConfig={videoConfig}
             sectionHeader={renderSectionHeader}
             contents={(product) => renderContents(product)}
             buttons={(product) => renderButtons(product)}

@@ -3,13 +3,18 @@ import React from 'react';
 interface VideoConfig {
     autoplay?: boolean;
     mute?: boolean;
-    loop?: boolean;
     controls?: boolean;
-    modestBranding?: boolean;
+    modestbranding?: boolean;
     rel?: boolean;
-    showInfo?: boolean;
-    facebookAllowFullscreen?: boolean;
-    show_text?: boolean;
+    loop?: boolean;
+    playlist?: boolean;
+    cc_load_policy?: boolean;
+    disablekb?: boolean;
+    "data-autoplay"?: boolean;
+    "data-show-text"?: boolean;
+    "data-allowfullscreen"?: boolean;
+    "data-show-captions"?: boolean;
+    "data-allow-script-access"?: "always" | "sameDomain" | "never";
 }
 interface Product {
     id: string;
@@ -17,6 +22,7 @@ interface Product {
     title: string;
     price: number;
     discountPrice?: number;
+    category?: string;
     videoUrl: string;
     currency?: string;
 }

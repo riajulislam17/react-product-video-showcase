@@ -1,7 +1,7 @@
 {
   "name": "react-product-video-showcase",
-  "version": "1.0.40",
-  "description": "Video Based Product Slider Youtube/Facebook Based",
+  "version": "1.0.41",
+  "description": "A React component to embed YouTube and Facebook product videos with full control options.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -43,10 +43,33 @@
   },
   "keywords": [
     "react",
-    "component",
-    "react-social-video",
-    "react-video-slider"
+    "video",
+    "youtube",
+    "facebook",
+    "video embed",
+    "react video player",
+    "product video",
+    "ecommerce video",
+    "react component",
+    "react product video",
+    "product showcase",
+    "video showcase",
+    "video carousel",
+    "video slider",
+    "video lazy load",
+    "video autoplay",
+    "react swiper",
+    "react product slider",
+    "youtube embed",
+    "facebook embed",
+    "youtube player",
+    "facebook player"
   ],
   "author": "Riajul Islam",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/riajulislam17/react-product-video-showcase"
+  },
+  "homepage": "https://react-product-video-showcase.vercel.app/"
 }

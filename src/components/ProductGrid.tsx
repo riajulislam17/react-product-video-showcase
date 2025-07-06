@@ -26,6 +26,7 @@ interface Props {
   slideInterval?: number;
   sliderDirection: "forward" | "backward";
   expandCard?: boolean;
+  overlayExpandCard?: boolean;
   expandCardSlide?: "vertical" | "horizontal";
 }
 
@@ -40,7 +41,8 @@ export const ProductGrid: React.FC<Props> = ({
   slide = false,
   slideInterval = 3000,
   sliderDirection = "backward",
-  expandCard = true,
+  expandCard = false,
+  overlayExpandCard = false,
   expandCardSlide = "vertical",
 }) => {
   const device = useDeviceType();
@@ -159,6 +161,7 @@ export const ProductGrid: React.FC<Props> = ({
                         contents={contents ? contents(product) : undefined}
                         buttons={buttons ? buttons(product) : undefined}
                         expandCard={expandCard}
+                        overlayExpandCard={overlayExpandCard}
                         onExpand={() => {
                           setActiveIndex(pageIndex * itemsPerPage + index);
                           setModalOpen(true);
@@ -173,7 +176,7 @@ export const ProductGrid: React.FC<Props> = ({
         </div>
       </div>
 
-      {expandCard &&
+      {(expandCard || overlayExpandCard) &&
         activeIndex !== null &&
         (expandCardSlide === "vertical" ? (
           <ProductModalY

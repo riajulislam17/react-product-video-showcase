@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { VideoPlayer } from "./VideoPlayer";
 import { Product, VideoConfig } from "../types";
-import { ArrowLeft, ArrowRight, Minimize } from "../utils/icons";
+import { ArrowLeft, ArrowRight, Close, Minimize } from "../utils/icons";
 
 interface ExpandedProductModalProps {
   products: Product[];
@@ -61,6 +61,7 @@ export const ProductModalX: React.FC<ExpandedProductModalProps> = ({
         aria-label="Close modal"
       >
         <Minimize className="rpvs-w-6 rpvs-h-6 rpvs-text-white" />
+        {/* <Close className="rpvs-w-6 rpvs-h-6 rpvs-text-white" /> */}
       </button>
 
       {/* Prev/Next buttons - md+ only */}

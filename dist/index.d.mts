@@ -70,6 +70,7 @@ interface Props {
     slideInterval?: number;
     sliderDirection: "forward" | "backward";
     expandCard?: boolean;
+    overlayExpandCard?: boolean;
     expandCardSlide?: "vertical" | "horizontal";
 }
 declare const ProductGrid: React.FC<Props>;

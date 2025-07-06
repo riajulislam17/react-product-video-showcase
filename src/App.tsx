@@ -14,26 +14,26 @@ function App() {
     handlePrev?: () => void;
     isSliding?: boolean;
   }) => (
-    <div className="flex justify-between items-center gap-4 my-4">
+    <div className="rpvs-flex rpvs-justify-between rpvs-items-center rpvs-gap-4 rpvs-my-4 rpvs-p-2">
       {isSliding && (
-        <div className="flex gap-2">
+        <div className="rpvs-flex rpvs-gap-2">
           <button
-            className="p-3 bg-gray-300 text-black cursor-pointer rounded-full"
+            className="rpvs-p-3 rpvs-bg-gray-300 rpvs-text-black rpvs-cursor-pointer rpvs-rounded-full"
             onClick={handlePrev}
           >
-            <ArrowLeft className="text-black w-6 h-5" />
+            <ArrowLeft className="rpvs-text-black rpvs-w-6 rpvs-h-5" />
           </button>
           <button
-            className="p-3 bg-gray-300 text-black cursor-pointer rounded-full"
+            className="rpvs-p-3 rpvs-bg-gray-300 rpvs-text-black rpvs-cursor-pointer rpvs-rounded-full"
             onClick={handleNext}
           >
-            <ArrowRight className="text-black w-6 h-5" />
+            <ArrowRight className="rpvs-text-black rpvs-w-6 rpvs-h-5" />
           </button>
         </div>
       )}
 
-      <h1 className="text-2xl font-bold text-center underline uppercase">
-        Video Products <small>(backward - horizontal)</small>
+      <h1 className="rpvs-text-2xl rpvs-font-bold rpvs-text-center rpvs-underline rpvs-uppercase">
+        Video Products
       </h1>
     </div>
   );
@@ -42,25 +42,25 @@ function App() {
     return (
       <>
         {/* md, lg */}
-        <div className="hidden md:block">
-          <div className="flex justify-between items-center gap-3 w-full my-1.5">
-            <h3 className="text-medium font-semibold text-primary">
+        <div className="rpvs-hidden rpvs-md:block">
+          <div className="rpvs-flex rpvs-justify-between rpvs-items-center rpvs-gap-3 rpvs-w-full rpvs-my-1.5">
+            <h3 className="rpvs-text-medium rpvs-font-semibold rpvs-text-primary">
               {product.title}
             </h3>
-            <div className=" font-semibold text-primary flex items-center gap-1">
+            <div className=" rpvs-font-semibold rpvs-text-primary rpvs-flex rpvs-items-center rpvs-gap-1">
               {product.currency}{" "}
               {(product?.discountPrice ?? 0) > 0 &&
               (product?.discountPrice ?? 0) < product.price ? (
                 <div>
-                  <span className="line-through text-gray-500 text-md">
+                  <span className="rpvs-line-through rpvs-text-gray-500 rpvs-text-md">
                     {product.price}
                   </span>
-                  <span className="text-gray-700 ml-2 text-xl">
+                  <span className="rpvs-text-gray-700 rpvs-ml-2 rpvs-text-xl">
                     {product.discountPrice}
                   </span>
                 </div>
               ) : (
-                <span className="text-gray-700 ml-2 text-xl">
+                <span className="rpvs-text-gray-700 rpvs-ml-2 rpvs-text-xl">
                   {product.price}
                 </span>
               )}
@@ -69,24 +69,24 @@ function App() {
         </div>
 
         {/* sm */}
-        <div className="block md:hidden">
-          <h3 className="text-medium font-semibold text-primary">
+        <div className="rpvs-block rpvs-md:hidden">
+          <h3 className="rpvs-text-medium rpvs-font-semibold rpvs-text-primary">
             {product.title}
           </h3>
-          <div className=" font-semibold text-primary flex items-center gap-1">
+          <div className=" rpvs-font-semibold rpvs-text-primary rpvs-flex rpvs-items-center rpvs-gap-1">
             {product.currency}{" "}
             {(product?.discountPrice ?? 0) > 0 &&
             (product?.discountPrice ?? 0) < product.price ? (
               <div>
-                <span className="line-through text-gray-500 text-md">
+                <span className="rpvs-line-through rpvs-text-gray-500 rpvs-text-md">
                   {product.price}
                 </span>
-                <span className="text-gray-700 ml-2 text-xl">
+                <span className="rpvs-text-gray-700 rpvs-ml-2 rpvs-text-xl">
                   {product.discountPrice}
                 </span>
               </div>
             ) : (
-              <span className="text-gray-700 ml-2 text-xl">
+              <span className="rpvs-text-gray-700 rpvs-ml-2 rpvs-text-xl">
                 {product.price}
               </span>
             )}
@@ -100,17 +100,17 @@ function App() {
     return (
       <>
         {/* md, lg */}
-        <div className="hidden md:block">
-          <div className="flex justify-between items-center gap-3 w-full my-1.5">
+        <div className="rpvs-hidden rpvs-md:block">
+          <div className="rpvs-flex rpvs-justify-between rpvs-items-center rpvs-gap-3 rpvs-w-full rpvs-my-1.5">
             <button
-              className="bg-gray-300 text-center py-2 w-[30%] text-md rounded cursor-pointer"
+              className="rpvs-bg-gray-300 rpvs-text-center rpvs-py-2 rpvs-w-[30%] rpvs-text-md rpvs-rounded rpvs-cursor-pointer"
               onClick={() => console.log(`Add to Cart`, product.id)}
             >
               Add to Cart
             </button>
 
             <button
-              className="bg-gray-300 text-center py-2 w-[70%] text-md rounded cursor-pointer"
+              className="rpvs-bg-gray-300 rpvs-text-center rpvs-py-2 w-[70%] rpvs-text-md rpvs-rounded rpvs-cursor-pointer"
               onClick={() => console.log(`Buy Now`, product.id)}
             >
               Buy Now
@@ -119,17 +119,17 @@ function App() {
         </div>
 
         {/* sm */}
-        <div className="block md:hidden">
-          <div className="flex flex-col gap-3 w-full my-1.5">
+        <div className="rpvs-block rpvs-md:hidden">
+          <div className="rpvs-flex rpvs-flex-col rpvs-gap-3 rpvs-w-full rpvs-my-1.5">
             <button
-              className="bg-gray-300 text-center py-2 text-md rounded cursor-pointer"
+              className="rpvs-bg-gray-300 rpvs-text-center rpvs-py-2 rpvs-text-md rpvs-rounded rpvs-cursor-pointer"
               onClick={() => console.log(`Add to Cart`, product.id)}
             >
               Add to Cart
             </button>
 
             <button
-              className="bg-gray-300 text-center py-2 text-md rounded cursor-pointer"
+              className="rpvs-bg-gray-300 rpvs-text-center rpvs-py-2 rpvs-text-md rpvs-rounded rpvs-cursor-pointer"
               onClick={() => console.log(`Buy Now`, product.id)}
             >
               Buy Now
@@ -163,7 +163,7 @@ function App() {
   return (
     <>
       <div className="">
-        <div className="p-5 md:p-10 lg:px-20">
+        <div className="rpvs-p-5 rpvs-md:p-10 rpvs-lg:px-20">
           <ProductGrid
             products={mockProducts}
             layout={{
@@ -176,10 +176,11 @@ function App() {
             sectionHeader={renderSectionHeader}
             contents={(product) => renderContents(product)}
             buttons={(product) => renderButtons(product)}
-            slide={true}
+            slide={false}
             slideInterval={5000}
-            sliderDirection={"backward"}
-            expandCard={true}
+            sliderDirection={"forward"}
+            expandCard={false}
+            overlayExpandCard={true}
             expandCardSlide={"horizontal"}
           />
         </div>

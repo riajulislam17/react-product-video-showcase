@@ -11,6 +11,7 @@ interface Props {
   buttons?: React.ReactNode;
   videoConfig?: Partial<VideoConfig>;
   expandCard?: boolean;
+  overlayExpandCard?: boolean;
   onExpand: () => void;
 }
 
@@ -21,6 +22,7 @@ export const ProductCard: React.FC<Props> = ({
   buttons,
   videoConfig,
   expandCard,
+  overlayExpandCard,
   onExpand,
 }) => {
   const finalConfig = mergeVideoConfig(videoConfig);
@@ -45,6 +47,16 @@ export const ProductCard: React.FC<Props> = ({
           >
             <Maximize className="rpvs-text-white rpvs-w-8 rpvs-h-8" />
           </button>
+        )}
+
+        {overlayExpandCard && (
+          <button
+            type="button"
+            aria-label="Expand card"
+            title="Expand"
+            className="rpvs-absolute rpvs-inset-0 rpvs-z-10 rpvs-bg-transparent rpvs-cursor-pointer"
+            onClick={onExpand}
+          />
         )}
       </div>
 

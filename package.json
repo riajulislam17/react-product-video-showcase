@@ -1,6 +1,6 @@
 {
   "name": "react-product-video-showcase",
-  "version": "1.0.41",
+  "version": "2.0.0",
   "description": "A React component to embed YouTube and Facebook product videos with full control options.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -19,23 +19,27 @@
   "scripts": {
     "build:css": "tailwindcss -i src/styles/tailwind.css -o dist/styles.css --minify",
     "build:injector": "ts-node src/scripts/generate-style-injector.cjs.ts",
-    "build": "npm run build:css && npm run build:injector && tsup"
+    "build": "npm run build:css && npm run build:injector && tsup",
+    "dev": "react-scripts start"
   },
   "devDependencies": {
     "@swc/core": "^1.12.7",
     "@types/estree": "^1.0.8",
     "@types/fs-extra": "^11.0.4",
     "@types/prop-types": "^15.7.15",
-    "@types/react": "^17.0.52",
-    "@types/react-dom": "^17.0.19",
+    "@types/react": "^17.0.87",
+    "@types/react-dom": "^17.0.26",
     "autoprefixer": "^10.4.21",
     "fs-extra": "^11.3.0",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.1",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.0",
-    "typescript": "^5.8.3"
+    "typescript": "^4.9.5"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
@@ -71,5 +75,20 @@
     "type": "git",
     "url": "https://github.com/riajulislam17/react-product-video-showcase"
   },
-  "homepage": "https://react-product-video-showcase.vercel.app/"
+  "homepage": "https://react-product-video-showcase.vercel.app/",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "web-vitals": "^5.0.3"
+  }
 }

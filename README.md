@@ -27,19 +27,21 @@
 
 ## Props
 
-| Prop              | Type                                        | Description                                              |
-| ----------------- | ------------------------------------------- | -------------------------------------------------------- |
-| `products`        | `Product[]`                                 | Array of product data (must contain `videoUrl` and `id`) |
-| `layout`          | `{ desktop, tablet, mobile }`               | Responsive layout: column & row per device               |
-| `maxItems`        | `number`                                    | Max products to show                                     |
-| `videoConfig`     | `Partial<VideoConfig>`                      | Video options (autoplay, mute, loop, etc.)               |
-| `contents`        | `(product) => ReactNode`                    | Custom content section inside card                       |
-| `buttons`         | `(product) => ReactNode`                    | Custom action buttons                                    |
-| `slide`           | `boolean`                                   | Enable/disable auto-sliding                              |
-| `slideInterval`   | `number`                                    | Time between slides (in ms)                              |
-| `sliderDirection` | `"forward"` \| `"backward"`                 | Slide direction                                          |
-| `modalCardSlide`  | `"vertical"` \| `"horizontal"`              | Modal animation direction                                |
-| `sectionHeader`   | `({ handleNext, handlePrev }) => ReactNode` | Optional header for title or next/prev buttons for slide |
+| Prop               | Type                                        | Description                                              |
+| ------------------ | ------------------------------------------- | -------------------------------------------------------- |
+| `products`         | `Product[]`                                 | Array of product data (must contain `videoUrl` and `id`) |
+| `layout`           | `{ desktop, tablet, mobile }`               | Responsive layout: column & row per device               |
+| `maxItems`         | `number`                                    | Max products to show                                     |
+| `videoConfig`      | `Partial<VideoConfig>`                      | Video options (autoplay, mute, loop, etc.)               |
+| `contents`         | `(product) => ReactNode`                    | Custom content section inside card                       |
+| `buttons`          | `(product) => ReactNode`                    | Custom action buttons                                    |
+| `slide`            | `boolean`                                   | Enable/disable auto-sliding                              |
+| `slideInterval`    | `number`                                    | Time between slides (in ms)                              |
+| `sliderDirection`  | `"forward"` \| `"backward"`                 | Slide direction                                          |
+| `modalCardSlide`   | `"vertical"` \| `"horizontal"`              | Modal animation direction                                |
+| `sectionHeader`    | `({ handleNext, handlePrev }) => ReactNode` | Optional header for title or next/prev buttons for slide |
+| `expandCard`       | `({ handleNext, handlePrev }) => ReactNode` | On button click expand the card as modal                 |
+| `overlayExpandCard`| `({ handleNext, handlePrev }) => ReactNode` | On card click expand the card as modal                   |
 
 # Layout Shape
 

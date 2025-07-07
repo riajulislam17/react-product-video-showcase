@@ -5,7 +5,7 @@ src/
 /node_modules
 /.pnp
 .pnp.js
-# src/lib/style-injector.ts
+
 command.txt
 
 # testing
